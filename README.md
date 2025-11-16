@@ -21,23 +21,30 @@ Admin panel for managing Adroit data with SSO authentication via AWS Cognito.
 npm install
 ```
 
-2. Create `.env.local` file (for local development):
-```env
-VITE_API_URL=http://localhost:3000
-VITE_AWS_REGION=us-east-2
-VITE_USER_POOL_ID=your-cognito-user-pool-id
-VITE_USER_POOL_WEB_CLIENT_ID=your-cognito-client-id
-VITE_OAUTH_DOMAIN=your-cognito-domain
-VITE_REDIRECT_SIGN_IN=http://localhost:5173/
-VITE_REDIRECT_SIGN_OUT=http://localhost:5173/
+2. Set up environment variables for local development:
+   - Copy `.env.example` to `.env.local`
+   - Fill in the values from Terraform outputs (see [ENV_SETUP.md](./ENV_SETUP.md) for details)
+   ```bash
+   cp .env.example .env.local
+   # Then edit .env.local with your values
+   ```
+
+3. Get Cognito values from Terraform (after deployment):
+```bash
+cd ../adroit-terraform
+terraform output cognito_user_pool_id
+terraform output cognito_client_id
+terraform output cognito_domain
 ```
 
-3. Run development server:
+4. Run development server:
 ```bash
 npm run dev
 ```
 
-4. Build for production:
+**Note:** For production, environment variables are automatically set via Terraform in AWS Amplify. See [ENV_SETUP.md](./ENV_SETUP.md) for complete details.
+
+5. Build for production:
 ```bash
 npm run build
 ```
@@ -71,6 +78,7 @@ adroit-frontend-admin/
 ├── package.json
 └── vite.config.js
 ```
+
 
 
 
