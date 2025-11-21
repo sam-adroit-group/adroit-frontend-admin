@@ -8,7 +8,11 @@ import Layout from './components/Layout/Layout';
 
 function App() {
   return (
-    <Authenticator>
+    <Authenticator
+      hideSignUp={true}
+      loginMechanisms={['email', 'username']}
+      socialProviders={['google']}
+    >
       {({ signOut, user }) => (
         <Router>
           <Layout user={user} signOut={signOut}>
